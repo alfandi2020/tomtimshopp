@@ -1,5 +1,8 @@
-DirectoryIndex index.php
+<IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond $1 !^(index\.php|application/assets|robots\.txt|favicon\.ico)
+RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond $1 !^(index\.php|robots\.txt)
+RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
