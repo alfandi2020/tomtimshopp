@@ -583,6 +583,7 @@ class Administrator extends CI_Controller
 
     public function simpanCetak()
     {
+	error_reporting(0);
         $id_registrasix = $this->input->post('id_registrasi');
         $internet = $this->input->post('internet');
         $addon1 = $this->input->post('addon1');
@@ -613,7 +614,7 @@ class Administrator extends CI_Controller
             $this->session->set_flashdata('massage', '<div class="alert alert-danger" role="alert"></i> Data pembayaran tidak boleh dobel nama ' . $get_registrasi['nama'] . ' ,bulan ' . $periode . ' dan tahun ' . $thn . '</div>');
             redirect('administrator/create');
         } else {
-            $total_tagihan = $r_tagihan + $get_registrasi['addon1'] == "" ? 0 : $get_registrasi['addon1']  + $get_registrasi['addon2'] == "" ? 0 : $get_registrasi['addon2'] + $get_registrasi['addon3'] == "" ? 0 : $get_registrasi['addon3'] - $get_registrasi['diskon'] == "" ? 0 : $get_registrasi['diskon'];
+            $total_tagihan = $r_tagihan + $get_registrasi['addon1'] + $get_registrasi['addon2'] + $get_registrasi['addon3'] - $get_registrasi['diskon'];
             $msgg= "📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu ".$get_registrasi['nama']." \nKami ucapakan Terima Kasih telah melakukan pembayaran internet untuk Bulan $periode $thn sebesar Rp". number_format($total_tagihan,0,".",".").".\n\nSalam,\nCS Admin\nLintas Jaringan Nusantara\nSub Net Jakarta Timur";
             $data = [
                 'id_cetak' => $kode,
