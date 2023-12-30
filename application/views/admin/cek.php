@@ -186,7 +186,8 @@
                                             <option value="<?php echo date('Y') - 2 ?>"><?php echo date('Y') - 2 ?></option>
                                             <option value="<?php echo date('Y') - 1 ?>"><?php echo date('Y') - 1 ?></option>
                                             <option value="<?php echo date('Y') ?>" selected><?php echo date('Y') ?></option>
-                                        </select>
+                                        	<option value="<?= date('Y') + 1 ?>"><?= date('Y') + 1 ?></option>
+					</select>
                                     </div>
                                     <div class="col-xl-3">
                                         <p></p>
