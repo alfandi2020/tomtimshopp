@@ -317,7 +317,7 @@ class Administrator extends CI_Controller
         // $marge_tgl = $tanggal . " " . $bulan . $tahunxx;
         // $h = $x['harga'] + $total;
 //        $tahun = date('Y');
-        $update_tanggal  = date('Y-m-d', strtotime('1 month', strtotime($x['tanggal_wa'])));
+        // $update_tanggal  = date('Y-m-d', strtotime('1 month', strtotime($x['tanggal_wa'])));
         //update bulan
         // $insert_log = [
         //     "tanggal_wa" => date('Y-m'),
@@ -336,40 +336,38 @@ class Administrator extends CI_Controller
                        
                         $token = "rasJFCC37ewayax21uu2Caog9CCqyT3KSwBWFqQAbQMdMAefxa";
                         $phone = $x['kontak']; //untuk group pakai groupid contoh: 62812xxxxxx-xxxxx
-                        $message = $msgg;
                         $sender = 'tommy';
                         $curl = curl_init();
-                        curl_setopt_array($curl, array(
-                          CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
-                          CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_ENCODING => '',
-                          CURLOPT_MAXREDIRS => 10,
-                          CURLOPT_TIMEOUT => 0,
-                          CURLOPT_FOLLOWLOCATION => true,
-                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                          CURLOPT_CUSTOMREQUEST => 'POST',
-                            CURLOPT_POSTFIELDS => '{
-                                                    "api_key": "iEQRRY8J4UUAkWKW78iPja2hc8rjlcCK",
-                                                    "sender": "6285954542160",
-                                                    "number": "083897943785",
-                                                    "message" : "' . $msgg . '"
-                                                    }',
-                            CURLOPT_HTTPHEADER => array(
-                                'Content-Type: application/json'
-                            ),
-                        ));
-                        $response = curl_exec($curl);
-                        curl_close($curl);
-                        echo $response;
-        exit;
-        $o = json_decode($response);
-        if (json_encode($o->status) == true) {
-            $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert"></i> WhatApp berhasil dikirim</div>');
+                        // curl_setopt_array($curl, array(
+                        //   CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
+                        //   CURLOPT_RETURNTRANSFER => true,
+                        //   CURLOPT_ENCODING => '',
+                        //   CURLOPT_MAXREDIRS => 10,
+                        //   CURLOPT_TIMEOUT => 0,
+                        //   CURLOPT_FOLLOWLOCATION => true,
+                        //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        //   CURLOPT_CUSTOMREQUEST => 'POST',
+                        //     CURLOPT_POSTFIELDS => '{
+                        //                             "api_key": "iEQRRY8J4UUAkWKW78iPja2hc8rjlcCK",
+                        //                             "sender": "6285954542160",
+                        //                             "number": "'.$phone.'",
+                        //                             "message" : "' . $msgg . '"
+                        //                             }',
+                        //     CURLOPT_HTTPHEADER => array(
+                        //         'Content-Type: application/json'
+                        //     ),
+                        // ));
+                        // $response = curl_exec($curl);
+                        // curl_close($curl);
+                        // echo $response;
+        // $o = json_decode($response);
+        // if (json_encode($o->status) == true) {
+        //     $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert"></i> WhatApp berhasil dikirim</div>');
             redirect('administrator/client?bulan='.$bulan.'&thn='.$tahun);
-        }else{
-            $this->session->set_flashdata('massage', '<div class="alert alert-alert" role="alert"></i> WhatApp gagal dikirim</div>');
-            redirect('administrator/client?bulan='.$bulan.'&thn='.$tahun);
-        }
+        // }else{
+        //     $this->session->set_flashdata('massage', '<div class="alert alert-alert" role="alert"></i> WhatApp gagal dikirim</div>');
+        //     redirect('administrator/client?bulan='.$bulan.'&thn='.$tahun);
+        // }
                
         // }
            // }
