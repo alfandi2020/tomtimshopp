@@ -615,7 +615,7 @@ class Administrator extends CI_Controller
             redirect('administrator/create');
         } else {
             $total_tagihan = $r_tagihan + $get_registrasi['addon1'] + $get_registrasi['addon2'] + $get_registrasi['addon3'] - $get_registrasi['diskon'];
-            $msgg= "📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu ".$get_registrasi['nama']." \nKami ucapakan Terima Kasih telah melakukan pembayaran internet untuk Bulan $periode $thn sebesar Rp". number_format($total_tagihan,0,".",".").".\n\nSalam,\nCS Admin\nLintas Jaringan Nusantara\nSub Net Jakarta Timur";
+            $msgg= "📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu ".$get_registrasi['nama']." \nKami Ucapkan Terima Kasih telah melakukan pembayaran internet untuk Bulan $periode $thn sebesar Rp". number_format($total_tagihan,0,".",".").".\n\nSalam,\nFinance\nLintas Jaringan Nusantara\nKantor Layanan Makasar - Jakarta Timur";
             $data = [
                 'id_cetak' => $kode,
                 'id_registrasi' => $id_registrasix,
@@ -639,7 +639,7 @@ class Administrator extends CI_Controller
                         $message = $msgg;
                         $sender = 'tommy';
                         $curl = curl_init();
-                        curl_setopt_array($curl, array(
+                      /*  curl_setopt_array($curl, array(
                           CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
                           CURLOPT_RETURNTRANSFER => true,
                           CURLOPT_ENCODING => '',
@@ -656,10 +656,10 @@ class Administrator extends CI_Controller
                         if (json_encode($o->status) == true){
                             $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert"></i> Silahkan Cetak Struk</div>');
                             redirect('administrator/cetak');
-                        }else{
+                        }else{*/
                             $this->session->set_flashdata('massage', '<div class="alert alert-alert" role="alert"></i> Gagal buat Pembayaran</div>');
                             redirect('administrator/cetak');
-                        }
+                       // }
         }
     
     }
