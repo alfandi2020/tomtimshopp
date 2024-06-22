@@ -622,7 +622,7 @@ class Administrator extends CI_Controller
             redirect('administrator/create');
         } else {
             $total_tagihan = $r_tagihan + $get_registrasi['addon1'] + $get_registrasi['addon2'] + $get_registrasi['addon3'] - $get_registrasi['diskon'];
-            $msgg= "📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu ".$get_registrasi['nama']." \nKami Ucapkan Terima Kasih telah melakukan pembayaran internet untuk Bulan $periode $thn sebesar Rp". number_format($total_tagihan,0,".",".").".\n\nSalam,\nFinance\nLintas Jaringan Nusantara\nKantor Layanan Makasar - Jakarta Timur";
+            $msgg= '📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu '.$get_registrasi['nama'].' \nKami Ucapkan Terima Kasih telah melakukan pembayaran internet untuk Bulan '.$periode.' '.$thn.' sebesar Rp".'. number_format($total_tagihan,0,".",".").'.\n\nSalam,\nFinance\nLintas Jaringan Nusantara\nKantor Layanan Makasar - Jakarta Timur';
             $data = [
                 'id_cetak' => $kode,
                 'id_registrasi' => $id_registrasix,
@@ -643,30 +643,38 @@ class Administrator extends CI_Controller
 
                         $token = "rasJFCC37ewayax21uu2Caog9CCqyT3KSwBWFqQAbQMdMAefxa";
                         $phone = $get_registrasi['kontak']; //untuk group pakai groupid contoh: 62812xxxxxx-xxxxx
-                        $message = $msgg;
                         $sender = 'tommy';
                         $curl = curl_init();
-                      /*  curl_setopt_array($curl, array(
-                          CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
-                          CURLOPT_RETURNTRANSFER => true,
-                          CURLOPT_ENCODING => '',
-                          CURLOPT_MAXREDIRS => 10,
-                          CURLOPT_TIMEOUT => 0,
-                          CURLOPT_FOLLOWLOCATION => true,
-                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                          CURLOPT_CUSTOMREQUEST => 'POST',
-                          CURLOPT_POSTFIELDS => 'sender='.$sender.'&number='.$phone.'&message='.$message,
-                        ));
+                        curl_setopt_array($curl, array(
+                            CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
+                            CURLOPT_RETURNTRANSFER => true,
+                            CURLOPT_ENCODING => '',
+                            CURLOPT_MAXREDIRS => 10,
+                            CURLOPT_TIMEOUT => 0,
+                            CURLOPT_FOLLOWLOCATION => true,
+                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                            CURLOPT_CUSTOMREQUEST => 'POST',
+                            CURLOPT_POSTFIELDS => '{
+                                                                "api_key": "iEQRRY8J4UUAkWKW78iPja2hc8rjlcCK",
+                                                                "sender": "6285961403102",
+                                                                "number": "' . $phone . '",
+                                                                "message" : "' . $msgg . '"
+                                                                }',
+                            CURLOPT_HTTPHEADER => array(
+                                'Content-Type: application/json'
+                            ),
+                        )
+                        );
                         $response = curl_exec($curl);
                         curl_close($curl);
                         $o = json_decode($response);
                         if (json_encode($o->status) == true){
                             $this->session->set_flashdata('massage', '<div class="alert alert-success" role="alert"></i> Silahkan Cetak Struk</div>');
                             redirect('administrator/cetak');
-                        }else{*/
+                        }else{
                             $this->session->set_flashdata('massage', '<div class="alert alert-alert" role="alert"></i> Gagal buat Pembayaran</div>');
                             redirect('administrator/cetak');
-                       // }
+                        }
         }
     
     }
