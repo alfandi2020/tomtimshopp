@@ -590,7 +590,6 @@ class Administrator extends CI_Controller
 
     public function simpanCetak()
     {
-	error_reporting(0);
         $id_registrasix = $this->input->post('id_registrasi');
         $internet = $this->input->post('internet');
         $addon1 = $this->input->post('addon1');
@@ -622,7 +621,7 @@ class Administrator extends CI_Controller
             redirect('administrator/create');
         } else {
             $total_tagihan = $r_tagihan + $get_registrasi['addon1'] + $get_registrasi['addon2'] + $get_registrasi['addon3'] - $get_registrasi['diskon'];
-            $msgg= '📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu '.$get_registrasi['nama'].' \nKami Ucapkan Terima Kasih telah melakukan pembayaran internet untuk Bulan '.$periode.' '.$thn.' sebesar Rp".'. number_format($total_tagihan,0,".",".").'.\n\nSalam,\nFinance\nLintas Jaringan Nusantara\nKantor Layanan Makasar - Jakarta Timur';
+            $msgg= '📧 *Pembayaran Sukses*\n\nYth Bapak/Ibu '.$get_registrasi['nama'].' \nKami Ucapkan Terima Kasih telah melakukan pembayaran internet untuk Bulan '.$periode.' '.$thn.' sebesar Rp.'. number_format($total_tagihan,0,".",".").'\n\nSalam,\nFinance\nLintas Jaringan Nusantara\nKantor Layanan Makasar - Jakarta Timur';
             $data = [
                 'id_cetak' => $kode,
                 'id_registrasi' => $id_registrasix,
@@ -639,11 +638,10 @@ class Administrator extends CI_Controller
                 'tanggal' => $tanggal,
                 'nomor_struk' => $nomor_struk,
             ];
-            $this->db->insert('tb_cetak', $data);
+            // $this->db->insert('tb_cetak', $data);
 
                         $token = "rasJFCC37ewayax21uu2Caog9CCqyT3KSwBWFqQAbQMdMAefxa";
                         $phone = $get_registrasi['kontak']; //untuk group pakai groupid contoh: 62812xxxxxx-xxxxx
-                        $sender = 'tommy';
                         $curl = curl_init();
                         curl_setopt_array($curl, array(
                             CURLOPT_URL => 'http://103.171.85.211:8000/send-message',
